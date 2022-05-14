@@ -1,6 +1,5 @@
 package com.bamboo.grpc;
 
-import com.google.rpc.context.AttributeContext;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 

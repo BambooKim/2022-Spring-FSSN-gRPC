@@ -1,7 +1,5 @@
 package com.bamboo.grpc;
 
-import com.google.protobuf.Value;
-import com.google.rpc.context.AttributeContext;
 import io.grpc.stub.StreamObserver;
 
 public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {

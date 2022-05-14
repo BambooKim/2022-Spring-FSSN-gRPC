@@ -2,3 +2,4 @@ sample-start
 *.DS_Store
 
 **/build/
+**/.gradle/
