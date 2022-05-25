@@ -10,7 +10,7 @@ buildscript {
 plugins {
     id 'java'
     id 'com.google.protobuf' version '0.8.16'
-
+    id 'application'
 }
 
 apply plugin: 'com.google.protobuf'
@@ -29,6 +29,9 @@ dependencies {
     implementation 'io.grpc:grpc-netty:1.38.0'
     implementation 'io.grpc:grpc-protobuf:1.38.0'
     implementation 'io.grpc:grpc-stub:1.38.0'
+
+
+    implementation 'io.grpc:grpc-core:1.38.0'
     implementation 'com.google.protobuf:protobuf-java:3.17.3'
 
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
@@ -62,12 +65,21 @@ sourceSets {
     }
 }
 
-test {
-    useJUnitPlatform()
+startScripts.enabled = false
+
+task Client(type: CreateStartScripts) {
+    mainClassName = 'com.bamboo.grpc.ClientMain'
+    applicationName = 'ClientMain'
+    outputDir = new File(project.buildDir, 'tmp')
+    classpath = startScripts.classpath
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'com.bamboo.grpc.ServerMain'
-    }
+applicationDistribution.into('bin') {
+    from (Client)
+
+    fileMode = 0755
+}
+
+test {
+    useJUnitPlatform()
 }
